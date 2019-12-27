@@ -1,0 +1,14 @@
+---
+# tasks file for roles/default-packages
+
+- name: "[DEFAULT PACKAGES]: Upgrade all installed packages"
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: "[DEFAULT PACKAGES]: Upgrade install default packages"
+  pacman:
+    name:
+      - htop
+      - iftop
+      - wget
