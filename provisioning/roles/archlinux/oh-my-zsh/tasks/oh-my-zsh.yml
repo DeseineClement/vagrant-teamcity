@@ -25,6 +25,6 @@
   copy:
     remote_src: yes
     src: /home/vagrant/.oh-my-zsh/templates/zshrc.zsh-template
-    dest: /home/vagrant/zshrc
+    dest: /home/vagrant/.zshrc
   become: yes
   become_user: vagrant
