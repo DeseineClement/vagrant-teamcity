@@ -3,3 +3,4 @@
     - all
   roles:
     - archlinux/default-packages
+    - archlinux/oh-my-zsh

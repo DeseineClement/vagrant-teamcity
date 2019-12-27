@@ -1,0 +1,30 @@
+---
+# tasks file for archlinux/oh-my-zsh
+
+- name: "[OH MY ZSH] prepare folder to download oh-my-zsh"
+  file:
+    path: /home/vagrant/.tmp/oh-my-zsh
+    state: directory
+    mode: '0755'
+  become: yes
+  become_user: vagrant
+
+- name: "[OH MY ZSH] download oh-my-zsh"
+  get_url:
+    url: https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
+    dest: /home/vagrant/.tmp/oh-my-zsh/install.sh
+  become: yes
+  become_user: vagrant
+
+- name: "[OH MY ZSH] execute install shell script"
+  shell: "yes | zsh /home/vagrant/.tmp/oh-my-zsh/install.sh"
+  become: yes
+  become_user: vagrant
+
+- name: "[OH MY ZSH] copy generated zshrc"
+  copy:
+    remote_src: yes
+    src: /home/vagrant/.oh-my-zsh/templates/zshrc.zsh-template
+    dest: /home/vagrant/zshrc
+  become: yes
+  become_user: vagrant

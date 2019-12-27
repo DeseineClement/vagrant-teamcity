@@ -12,3 +12,4 @@
       - htop
       - iftop
       - wget
+      - git
