@@ -1,0 +1,19 @@
+[Unit]
+Description=Start TeamCity Server
+After=network-online.target
+
+[Service]
+User=root
+Group=root
+UMask=007
+
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/var/www/TeamCity/bin/runAll.sh start
+ExecStop=/var/www/TeamCity/bin/runAll.sh stop
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

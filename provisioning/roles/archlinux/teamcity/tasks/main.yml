@@ -1,0 +1,39 @@
+---
+# tasks file for archlinux/teamcity
+
+- name: "[TEAM CITY] install Java"
+  pacman:
+    name:
+      - jre10-openjdk
+      - jdk10-openjdk
+
+- name: "[TEAM CITY] prepare folder to download TeamCity"
+  file:
+    path: /var/www/
+    state: directory
+    mode: '0755'
+
+- name: "[TEAM CITY] check if TeamCity has been already downloaded"
+  stat:
+    path: /var/www/TeamCity/bin/runAll.sh
+  register: stat_result
+
+- name: "[TEAM CITY] download TeamCity"
+  unarchive:
+    src: https://download-cf.jetbrains.com/teamcity/TeamCity-2019.2.tar.gz
+    dest: /var/www/
+    remote_src: yes
+  when: stat_result.stat.exists == False
+
+- name: "[TEAM CITY] add Team City Service configuration"
+  copy:
+    src: teamcity.service
+    dest: /etc/systemd/system/teamcity.service
+    mode: '0777'
+  notify: systemd daemon reload
+
+- name: "[TEAM CITY] enable and start Team City service"
+  systemd:
+    name: teamcity
+    state: started
+    enabled: yes

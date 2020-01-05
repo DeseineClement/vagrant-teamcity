@@ -1,0 +1,6 @@
+---
+# handlers file for archlinux/teamcity
+
+- name: systemd daemon reload
+  systemd:
+    daemon_reload: yes

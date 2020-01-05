@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell",
                       path: "#{scripts_path}/python.sh"
 
-  config.vm.network "forwarded_port", guest: 22, host: 2201
+  config.vm.network "forwarded_port", guest: 8111, host: 8111
 
   config.vm.provision :ansible do |ansible|
     ansible.limit = "team-city"
